@@ -141,7 +141,7 @@
 											valorAtual = 0.0;
 										} else {
 											valorAtual =  valorAtual.replace(",", ".")
-										}
+										} 
 										var valorTotalAmostra = 0.0 + parseFloat(valorAtual);
 										valorTotalAmostra += parseFloat(precoParametro);
 										campoValorAtual.value = Number(valorTotalAmostra).toFixed(2);
