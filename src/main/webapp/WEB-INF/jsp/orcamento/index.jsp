@@ -1,3 +1,4 @@
+<%@taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <head>
 	<title>Orcamento [index]</title>
 </head>
@@ -18,11 +19,12 @@
 				<td>${orcamento.cliente.nome}</td>
 				<td>${orcamento.valorTotal}</td>
 				<td colspan="2">
-					<a href="${pageContext.request.contextPath}/orcamentos/${orcamento.id}/edit"><img src="imagens/editar.png" title="Editar registro"/></a>
+					<a href="${pageContext.request.contextPath}/orcamentos/${orcamento.id}/edit"><img src="${pageContext.request.contextPath}/imagens/editar.png" title="Editar registro"/></a>
 
-					<a href="${pageContext.request.contextPath}/orcamentos/delete/${orcamento.id}"><img src="imagens/excluir.png" title="Excluir registro"/></a>
+					<a href="${pageContext.request.contextPath}/orcamentos/delete/${orcamento.id}"><img src="${pageContext.request.contextPath}/imagens/excluir.png" title="Excluir registro"/></a>
 				</td>				
 			</tr>
 		</c:forEach>
 	</table>
+	<tag:paginador url="${pageContext.request.contextPath}/orcamentos/page/"></tag:paginador>
 </body>

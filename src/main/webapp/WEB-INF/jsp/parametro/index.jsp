@@ -1,3 +1,5 @@
+<%@taglib prefix="tag" tagdir="/WEB-INF/tags" %>
+
 <head>
 	<title>Parametro [index]</title>
 </head>
@@ -21,13 +23,14 @@
 				<td>${parametro.lq}</td>
 				<td>${parametro.metodo}</td>
 				<td colspan="2">
-					<a href="${pageContext.request.contextPath}/parametros/${parametro.id}/edit"><img src="imagens/editar.png" title="Editar registro"/></a>
+					<a href="${pageContext.request.contextPath}/parametros/${parametro.id}/edit"><img src="${pageContext.request.contextPath}/imagens/editar.png" title="Editar registro"/></a>
 
-					<a href="${pageContext.request.contextPath}/parametros/delete/${parametro.id}"><img src="imagens/excluir.png" title="Excluir registro"/></a>
+					<a href="#" onclick="excluirRegistro('${pageContext.request.contextPath}/parametros/delete/${parametro.id}');"><img src="${pageContext.request.contextPath}/imagens/excluir.png" title="Excluir registro"/></a>
 				</td>				
 			</tr>
 		</c:forEach>
 	</table>
+	<tag:paginador url="${pageContext.request.contextPath}/parametros/page/"></tag:paginador> 
 
 	<br />
 </body>

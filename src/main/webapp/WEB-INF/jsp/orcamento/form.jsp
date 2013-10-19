@@ -1,27 +1,26 @@
-<c:if test="${not empty errors}">
-	<c:forEach items="${errors}" var="error">
-		${error.category} - ${error.message}<br />
-	</c:forEach>
-</c:if>
 <script type="text/javascript">
 	var precos = [];																
 </script>
 
 <form action="${pageContext.request.contextPath}/orcamentos"
-	method="post" class="form-horizontal">
+	method="post" class="form-horizontal" onsubmit="return validar();">
 	<fieldset>
 
-		<c:if test="${not empty orcamento.id}">
-			<input type="hidden" name="orcamento.id" value="${orcamento.id}" />
-			<input type="hidden" name="_method" value="put" />
-		</c:if>
 		<legend>
 			Cadastro de Or&ccedil;amentos <a
-				href="${pageContext.request.contextPath}/orcamentos"
+				href="${pageContext.request.contextPath}/orcamentos/page/1"
 				class="btn btn-inverse btn-mini pull-right"><i
 				class="icon-white icon-arrow-left"></i> Voltar</a>
 		</legend>
-
+		<c:if test="${not empty orcamento.id}">
+			<input type="hidden" name="orcamento.id" value="${orcamento.id}" />
+			<input type="hidden" name="_method" value="put" />
+			<div class="control-group">
+				<div class="controls">
+					${orcamento.dataInclusao }
+				</div>
+			</div>
+		</c:if>
 
 		<div class="control-group">
 			<div class="controls">
@@ -34,7 +33,7 @@
 
 		<div class="control-group">
 			<div class="controls">
-				<select id="orcamento.cliente" name="orcamento.cliente.id"
+				<select id="orcamento-cliente" name="orcamento.cliente.id"
 					class="input-xlarge" required="">
 					<option value="0">Selecione</option>
 					<c:forEach items="${clienteList}" var="cliente">
@@ -49,9 +48,10 @@
 		<div class="control-group">
 			<div class="controls">
 
-
-				<a data-toggle="modal" href="#myModal"
-					class="btn btn-primary btn-lg">Incluir quadro</a>
+				<c:if test="${not empty orcamento.id}">
+					<a data-toggle="modal" 
+						class="btn btn-primary btn-lg" href="#myModal">Incluir quadro</a>
+				</c:if>
 
 				<!-- Modal -->
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -67,7 +67,7 @@
 								<div class="control-group">
 									<div class="controls">
 										<input type="text" id="nomeQuadro"
-											placeholder="Nome do quadro" />
+											placeholder="Nome do quadro" disabled="true"/>
 									</div>
 								</div>
 								<div class="control-group">
@@ -150,6 +150,7 @@
 											maxlength : false
 										});
 									}
+									combo.value = 0;
 								}
 								
 								
@@ -181,15 +182,27 @@
 										};
 										
 										$.getJSON("/orcamento/incluirQuadro?" + parametros, dados, function(json) {
-											$("#table-quadros").append($('<tr>'))
+											$("#table-quadros").append($('<tr>').attr('id', json.nome.replace(" ", "_"))
 												.append($('<td>').append(json.nome))
 												.append($('<td>').append(json.valorTotal))
-												.append($('<td>').append("Excluir"));
-												
+												.append($('<td>').append("Excluir")));
+											$("#listaParametros").empty();
+											document.getElementById("valorTotal").value = Number(0.0).toFixed(2);
+											document.getElementById("nomeQuadro").value = "";
+											alert("Parametro incluido com sucesso!")
 										});
 									} else {
 										alert("Selecione alguns parametros para incluir o quadro!");
 									}
+								}
+								
+								function validar() {
+									if($("#orcamento-cliente").val() == 0 ) {
+										alert("Campo cliente obrigatorio.");
+										$("#orcamento-cliente").focus();
+										return false;
+									}
+									return true;
 								}
 								
 								

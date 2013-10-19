@@ -3,9 +3,9 @@
 
 <!DOCTYPE html>
 
-<html>
+<html  xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br">
 <head>
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -38,9 +38,9 @@
 					</p>
 					<ul class="nav">
 						<li><a href="/">In&iacute;cio</a></li>
-						<li><a href="/clientes">Clientes</a></li>
-						<li><a href="/parametros">Par&acirc;metros</a></li>
-						<li><a href="/orcamentos">Or&ccedil;amentos</a></li>
+						<li><a href="/clientes/page/1">Clientes</a></li>
+						<li><a href="/parametros/page/1">Par&acirc;metros</a></li>
+						<li><a href="/orcamentos/page/1">Or&ccedil;amentos</a></li>
 						<li><a href="#">Laudos</a></li>
 						<li><a href="#">Menu 5</a></li>
 					</ul>

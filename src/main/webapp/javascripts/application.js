@@ -95,3 +95,11 @@ function validarCPF(cpf) {
     return true;
     
 }
+
+function excluirRegistro(url) {
+	if(confirm("Deseja realmente excluir esse registro?")) {
+		window.location = url;
+	} else {
+		return false;
+	}
+}

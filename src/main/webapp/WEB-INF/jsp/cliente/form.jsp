@@ -130,6 +130,14 @@ function validar(valor) {
 				campo.focus();
 			}
 		}
+		$.getJSON("/cliente/verificaCpfCnpj?cpfCnpj="+valor, function (json) {
+			if(json) {
+				alert("CPF/CNPJ já existente!");
+				campo.value = "";
+				campo.focus();
+			}
+		});
+		
 	}
 }
 

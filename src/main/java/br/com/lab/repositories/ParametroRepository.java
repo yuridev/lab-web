@@ -18,5 +18,9 @@ public interface ParametroRepository {
 	Parametro find(Long id);
 	
 	List<Parametro> findAll();
+	
+	List<Parametro> listarPaginado(int pgAtual, int qtdRegistros);
+	
+	int getQuantidadeRegistros();
 
 }

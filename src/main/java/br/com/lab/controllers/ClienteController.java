@@ -12,6 +12,7 @@ import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.view.Results;
 
 @Resource
 public class ClienteController {
@@ -69,5 +70,10 @@ public class ClienteController {
     public void destroy(Cliente cliente) {
         repository.destroy(repository.find(cliente.getId()));
         result.redirectTo(this).index();
+    }
+    
+    public void verificaCpfCnpj(String cpfCnpj) {
+        boolean existe = repository.cpfCnpjExistente(cpfCnpj);
+        result.use(Results.json()).withoutRoot().from(existe).serialize();
     }
 }

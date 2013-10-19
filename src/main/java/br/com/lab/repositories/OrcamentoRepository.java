@@ -19,4 +19,7 @@ public interface OrcamentoRepository {
 	
 	List<Orcamento> findAll();
 
+	List<Orcamento> listarPaginado(int pgAtual, int qtdRegistros);
+    
+    int getQuantidadeRegistros();
 }

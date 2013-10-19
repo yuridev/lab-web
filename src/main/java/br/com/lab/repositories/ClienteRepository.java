@@ -18,5 +18,9 @@ public interface ClienteRepository {
 	Cliente find(Long id);
 	
 	List<Cliente> findAll();
+	
+	boolean cpfCnpjExistente(String cpfCnpj);
+	
+	List<Cliente> listarPaginado(int pgAtual, int qtdRegistros);
 
 }
