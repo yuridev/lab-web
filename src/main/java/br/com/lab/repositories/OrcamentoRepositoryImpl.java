@@ -1,6 +1,8 @@
 package br.com.lab.repositories;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.lab.models.Orcamento;
@@ -13,5 +15,4 @@ public class OrcamentoRepositoryImpl
 	OrcamentoRepositoryImpl(Session session) {
 		super(session);
 	}
-	
 }

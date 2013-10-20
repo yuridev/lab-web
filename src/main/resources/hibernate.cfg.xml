@@ -16,5 +16,6 @@
 		<mapping class='br.com.lab.models.Parametro'/>
 		<mapping class='br.com.lab.models.Orcamento'/>
 		<mapping class='br.com.lab.models.QuadroOrcamento'/>
+		<mapping class='br.com.lab.models.SequenciadorOrcamento'/>
 	</session-factory>
 </hibernate-configuration>

@@ -11,6 +11,7 @@ import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.view.Results;
 
 @Resource
 public class QuadroOrcamentoController {
@@ -65,9 +66,4 @@ public class QuadroOrcamentoController {
 		return repository.find(quadroOrcamento.getId());
 	}
 
-	@Delete("/quadroOrcamentos/{quadroOrcamento.id}")
-	public void destroy(QuadroOrcamento quadroOrcamento) {
-		repository.destroy(repository.find(quadroOrcamento.getId()));
-		result.redirectTo(this).index();  
-	}
 }

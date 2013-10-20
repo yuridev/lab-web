@@ -1,5 +1,7 @@
 package br.com.lab.controllers;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +21,12 @@ import br.com.caelum.vraptor.view.Results;
 import br.com.lab.helpers.PaginadorHelper;
 import br.com.lab.models.Orcamento;
 import br.com.lab.models.QuadroOrcamento;
+import br.com.lab.models.SequenciadorOrcamento;
 import br.com.lab.repositories.ClienteRepository;
 import br.com.lab.repositories.OrcamentoRepository;
 import br.com.lab.repositories.ParametroRepository;
 import br.com.lab.repositories.QuadroOrcamentoRepository;
+import br.com.lab.repositories.SequenciadorOrcamentoRepository;
 
 @Resource
 public class OrcamentoController {
@@ -35,10 +39,11 @@ public class OrcamentoController {
     private final ClienteRepository clienteRepository;
     private final ParametroRepository parametroRepository;
     private final HttpServletRequest request;
+    private final SequenciadorOrcamentoRepository sequenciadorOrcamentoRepository;
 
     public OrcamentoController(HttpServletRequest request, Result result, OrcamentoRepository repository,
             Validator validator, QuadroOrcamentoRepository quadroOrcamentoRepository,
-            ClienteRepository clienteRepository, ParametroRepository parametroRepository) {
+            ClienteRepository clienteRepository, ParametroRepository parametroRepository, SequenciadorOrcamentoRepository sequenciadorOrcamentoRepository) {
         this.request = request;
         this.result = result;
         this.repository = repository;
@@ -47,6 +52,7 @@ public class OrcamentoController {
         this.quadroOrcamentoRepository = quadroOrcamentoRepository;
         this.clienteRepository = clienteRepository;
         this.parametroRepository = parametroRepository;
+        this.sequenciadorOrcamentoRepository = sequenciadorOrcamentoRepository;
     }
 
     @Get("/orcamentos")
@@ -63,6 +69,8 @@ public class OrcamentoController {
     }
 
     private void carregarOrcamento(Orcamento orcamento) {
+        SequenciadorOrcamento next = sequenciadorOrcamentoRepository.getNext();
+        sequenciadorOrcamentoRepository.create(next);
         orcamento.setDataAtualizacao(new LocalDate());
         orcamento.setHoraAtualizacao(new LocalTime());
     }
@@ -70,7 +78,12 @@ public class OrcamentoController {
     @Get("/orcamentos/new")
     public Orcamento newOrcamento() {
         carregarMetaDados();
-        return new Orcamento();
+        Orcamento orcamento = new Orcamento();
+        DecimalFormat format = new DecimalFormat("0000");
+        SequenciadorOrcamento next = sequenciadorOrcamentoRepository.getNext();
+        String numero = format.format(next.getNumero());
+        orcamento.setNumero(numero + "/" + next.getData().toString("yy"));
+        return orcamento;
     }
 
     @Put("/orcamentos")
@@ -86,7 +99,6 @@ public class OrcamentoController {
     public Orcamento edit(Orcamento orcamento) {
         carregarMetaDados();
         Orcamento find = repository.find(orcamento.getId());
-//        find.setQuadros(quadroOrcamentoRepository.findAll());
         carregarDatas(find);
         return find;
     }
@@ -126,6 +138,12 @@ public class OrcamentoController {
 
     protected void paginar(int pgAtual, int qtdRegistros) {
         PaginadorHelper.paginar(result, pgAtual, qtdRegistros, repository.getQuantidadeRegistros());
+    }
+    
+    @Get("/orcamentos/deletarQuadro/{quadroOrcamento.id}")
+    public void destroy(QuadroOrcamento quadroOrcamento) {
+        quadroOrcamentoRepository.destroy(quadroOrcamentoRepository.find(quadroOrcamento.getId()));
+        result.use(Results.json()).withoutRoot().from(quadroOrcamento).serialize();  
     }
 
 }
