@@ -6,7 +6,8 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 
 @javax.persistence.Entity
 public class Orcamento extends Entity {
@@ -15,11 +16,12 @@ public class Orcamento extends Entity {
     private Double valorTotal;
     @ManyToOne
     private Cliente cliente;
-    
-    @OneToMany
+
+    @OneToMany(mappedBy = "orcamento")
     private List<QuadroOrcamento> quadros;
-    
-    private DateTime dataAtualizacao;
+
+    private LocalDate dataAtualizacao;
+    private LocalTime horaAtualizacao;
 
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
@@ -53,12 +55,20 @@ public class Orcamento extends Entity {
         this.quadros = quadros;
     }
 
-    public DateTime getDataAtualizacao() {
+    public LocalDate getDataAtualizacao() {
         return dataAtualizacao;
     }
 
-    public void setDataAtualizacao(DateTime dataAtualizacao) {
+    public void setDataAtualizacao(LocalDate dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
+    }
+
+    public LocalTime getHoraAtualizacao() {
+        return horaAtualizacao;
+    }
+
+    public void setHoraAtualizacao(LocalTime horaAtualizacao) {
+        this.horaAtualizacao = horaAtualizacao;
     }
 
 }

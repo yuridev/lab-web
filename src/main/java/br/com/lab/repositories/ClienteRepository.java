@@ -22,5 +22,7 @@ public interface ClienteRepository {
 	boolean cpfCnpjExistente(String cpfCnpj);
 	
 	List<Cliente> listarPaginado(int pgAtual, int qtdRegistros);
+	
+	int getQuantidadeRegistros();
 
 }

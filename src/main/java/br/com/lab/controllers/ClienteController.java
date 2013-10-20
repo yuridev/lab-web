@@ -3,9 +3,6 @@ package br.com.lab.controllers;
 import java.util.Arrays;
 import java.util.List;
 
-import br.com.lab.enumeradores.Estado;
-import br.com.lab.models.Cliente;
-import br.com.lab.repositories.ClienteRepository;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
@@ -13,6 +10,10 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.view.Results;
+import br.com.lab.enumeradores.Estado;
+import br.com.lab.helpers.PaginadorHelper;
+import br.com.lab.models.Cliente;
+import br.com.lab.repositories.ClienteRepository;
 
 @Resource
 public class ClienteController {
@@ -75,5 +76,16 @@ public class ClienteController {
     public void verificaCpfCnpj(String cpfCnpj) {
         boolean existe = repository.cpfCnpjExistente(cpfCnpj);
         result.use(Results.json()).withoutRoot().from(existe).serialize();
+    }
+    
+    @Get("/clientes/page/{pgAtual}")
+    public List<Cliente> index(int pgAtual) {
+        int qtdRegistros = PaginadorHelper.QTD_REGISTROS_PAGINADOR;
+        paginar(pgAtual, qtdRegistros);
+        return repository.listarPaginado(pgAtual, qtdRegistros);
+    }
+
+    protected void paginar(int pgAtual, int qtdRegistros) {
+        PaginadorHelper.paginar(result, pgAtual, qtdRegistros, repository.getQuantidadeRegistros());
     }
 }

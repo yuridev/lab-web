@@ -3,20 +3,21 @@ package br.com.lab.models;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @javax.persistence.Entity
 public class QuadroOrcamento extends Entity {
-    
+
     private String nome;
-    
+
     @OneToMany
     private List<Parametro> parametros;
-    
+
     @ManyToOne
     private Orcamento orcamento;
-    
+
     private BigDecimal valorTotal;
 
     public String getNome() {

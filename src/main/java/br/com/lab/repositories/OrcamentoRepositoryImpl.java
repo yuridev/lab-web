@@ -13,4 +13,5 @@ public class OrcamentoRepositoryImpl
 	OrcamentoRepositoryImpl(Session session) {
 		super(session);
 	}
+	
 }

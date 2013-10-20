@@ -59,7 +59,7 @@ public abstract class Repository<T, I extends Serializable> {
     public List<T> listarPaginado(int pagAtual, int qtdRegistros) {
         Criteria criteria = createCriteria();
         criteria.setMaxResults(qtdRegistros);
-        criteria.setFirstResult(pagAtual -1 * qtdRegistros);
+        criteria.setFirstResult((pagAtual -1) * qtdRegistros);
         return criteria.list();
     }
 
