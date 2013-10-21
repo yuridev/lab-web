@@ -189,11 +189,9 @@
 											$("#table-quadros").append($('<tr>').attr('id', 'tr-quadro-' + json.id)
 												.append($('<td>').append(json.nome))
 												.append($('<td>').append(json.valorTotal))
-												.append($('<td>').append($('<a>')
-														.attr('href', '#')
-														.attr('src', '${pageContext.request.contextPath}/imagens/excluir.png')
-														.attr('title', 'Excluir quadro')
-														.onclick(function(){ deletarQuadro(json.id)}))));
+												.append($('<td>')
+														.append($('<a>').attr('href', '#').attr('title', 'Excluir quadro').click(function(){ deletarQuadro(json.id);})
+																.append($('<img>').attr('src', '${pageContext.request.contextPath}/imagens/excluir.png')))));
 											$("#listaParametros").empty();
 											document.getElementById("valorTotal").value = Number(0.0).toFixed(2);
 											document.getElementById("nomeQuadro").value = "";
@@ -225,43 +223,13 @@
 					<!-- /.modal-dialog -->
 				</div>
 				<!-- /.modal -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 				<fieldset>
 					<legend>Quadros</legend>
 					<table id="table-quadros"
 						class="table table-striped table-bordered table-condensed">
 						<tr>
 							<th>Quadro</th>
-							<th>Valor total</th>
+							<th>Valor (R$)</th>
 							<th>A&ccedil;&otilde;es</th>
 						</tr>
 						<c:if test="${not empty orcamento.quadros}">
@@ -283,16 +251,10 @@
 		</div>
 
 		<div class="control-group">
-			<div class="controls"></div>
+			<div class="controls">
+				$
+			</div>
 		</div>
-
-		<!-- 		<div class="control-group"> -->
-		<!-- 			<div class="controls"> -->
-
-
-		<!-- 			</div> -->
-		<!-- 		</div> -->
-
 		<div class="control-group">
 			<div class="controls">
 				<button class="btn btn-success">Salvar</button>

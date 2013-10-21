@@ -1,22 +1,21 @@
 package br.com.lab.models;
 
-import org.joda.time.LocalDate;
 
 @javax.persistence.Entity
 public class SequenciadorOrcamento extends Entity{
     
     private Integer numero;
-    private LocalDate data;
+    private String data;
     public Integer getNumero() {
         return numero;
     }
     public void setNumero(Integer numero) {
         this.numero = numero;
     }
-    public LocalDate getData() {
+    public String getData() {
         return data;
     }
-    public void setData(LocalDate data) {
+    public void setData(String data) {
         this.data = data;
     }
 

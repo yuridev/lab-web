@@ -12,13 +12,13 @@
 <title><decorator:title
 		default="KBF Lab - Software de gerenciamento de or&ccedil;amentos e laudos" /></title>
 <decorator:head />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css"
+<script src="${pageContext.request.contextPath}/javascripts/jquery.min.js"></script>
+<link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css"
 	rel="stylesheet" type="text/css" />
 <link
-	href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css"
+	href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css"
 	rel="stylesheet" type="text/css" />
-<script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
 
 <script src="${pageContext.request.contextPath}/javascripts/application.js"></script>
 </head>

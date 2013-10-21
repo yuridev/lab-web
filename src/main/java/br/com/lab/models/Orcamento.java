@@ -1,8 +1,8 @@
 package br.com.lab.models;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -13,7 +13,7 @@ import org.joda.time.LocalTime;
 public class Orcamento extends Entity {
 
     private String numero;
-    private Double valorTotal;
+    private BigDecimal valorTotal;
     @ManyToOne
     private Cliente cliente;
 
@@ -23,11 +23,11 @@ public class Orcamento extends Entity {
     private LocalDate dataAtualizacao;
     private LocalTime horaAtualizacao;
 
-    public void setValorTotal(Double valorTotal) {
+    public void setValorTotal(BigDecimal valorTotal) {
         this.valorTotal = valorTotal;
     }
 
-    public Double getValorTotal() {
+    public BigDecimal getValorTotal() {
         return valorTotal;
     }
 

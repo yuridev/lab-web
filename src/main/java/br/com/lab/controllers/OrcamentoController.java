@@ -82,7 +82,7 @@ public class OrcamentoController {
         DecimalFormat format = new DecimalFormat("0000");
         SequenciadorOrcamento next = sequenciadorOrcamentoRepository.getNext();
         String numero = format.format(next.getNumero());
-        orcamento.setNumero(numero + "/" + next.getData().toString("yy"));
+        orcamento.setNumero(numero + "/" + next.getData());
         return orcamento;
     }
 
