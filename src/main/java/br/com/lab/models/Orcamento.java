@@ -22,6 +22,25 @@ public class Orcamento extends Entity {
 
     private LocalDate dataAtualizacao;
     private LocalTime horaAtualizacao;
+    
+    private BigDecimal valorKM;
+    private BigDecimal valorColeta;
+
+    public BigDecimal getValorKM() {
+        return valorKM;
+    }
+
+    public void setValorKM(BigDecimal valorKM) {
+        this.valorKM = valorKM;
+    }
+
+    public BigDecimal getValorColeta() {
+        return valorColeta;
+    }
+
+    public void setValorColeta(BigDecimal valorColeta) {
+        this.valorColeta = valorColeta;
+    }
 
     public void setValorTotal(BigDecimal valorTotal) {
         this.valorTotal = valorTotal;

@@ -1,7 +1,5 @@
 <script type="text/javascript">
 	var precos = [];
-	var numeroQuadro = 1;
-	$("#nomeQuadro").text("Quadro" + numeroQuadro);
 </script>
 
 <form action="${pageContext.request.contextPath}/orcamentos"
@@ -75,7 +73,7 @@
 								</div>
 								<div class="control-group">
 									<div class="controls">
-										<select id="orcamento.parametros" class="input-xlarge">
+										<select id="orcamento-parametros" class="input-xlarge">
 											<option value="0">Selecione um Par&acirc;metro</option>
 											<c:forEach items="${parametroList}" var="parametro">
 												<option value="${parametro.id}">${parametro.nome}</option>
@@ -96,6 +94,12 @@
 								</div>
 								<div class="control-group">
 									<div class="controls">
+										<input type="text" id="quantidadeAmostras"
+											placeholder="Quantidade de amostras" class="integer" />
+									</div>
+								</div>
+								<div class="control-group">
+									<div class="controls">
 										<input type="text" id="valorTotal"
 											placeholder="Valor por amostra (R$)" class="money2" disabled="true"/>
 									</div>
@@ -110,9 +114,8 @@
 								<script type="text/javascript">
 							
 								function adicionaParametro() {
-									var combo = document.getElementById("orcamento.parametros");
-									var valor = combo[combo.selectedIndex].text;
-									var idParametro = combo[combo.selectedIndex].value;
+									var valor = $("#orcamento-parametros option:selected").text();
+									var idParametro = $("#orcamento-parametros option:selected").val();
 									var precoParametro = precos[idParametro];
 									var incluir = true;
 									
@@ -153,7 +156,7 @@
 											maxlength : false
 										});
 									}
-									combo.value = 0;
+									$("#orcamento-parametros").val(0);
 								}
 								
 								
@@ -170,7 +173,7 @@
 								}
 								
 								function incluirQuadro() {
-									
+									var quantidadeAmostras = $("#quantidadeAmostras").val();
 									var nome = $("#nomeQuadro").val();
 									var parametros = '';
 									var valorTotal = $("#valorTotal").val();
@@ -178,17 +181,45 @@
 										parametros += 'quadro.parametros[' + index + '].id=' + obj.value + '&';
 									});
 									parametros = parametros.substring(0, parametros.length - 1);
-									if(parametros != '') {
+									
+									var incluir = true;
+									
+									if(nome == '' && incluir) {
+										alert("Campo nome é de preenchimento obrigatório.");
+										$("#nomeQuadro").focus();
+										incluir = false;
+									}
+									
+									if(parametros == '' && incluir) {
+										alert("Selecione alguns parametros para incluir o quadro.");
+										incluir = false;
+									}
+										
+									if(quantidadeAmostras == '' && incluir) {
+										alert("Campo quantidade de amostras é de preenchimento obrigatório.");
+										$("#quantidadeAmostras").focus();
+										incluir = false;
+									}
+									if(incluir) {
 										var dados = {
 											"quadro.nome" : nome,
 											"quadro.valorTotal" : valorTotal,
-											"quadro.orcamento.id" : '${orcamento.id}'
+											"quadro.orcamento.id" : '${orcamento.id}',
+											"quadro.quantidadeAmostras" : quantidadeAmostras
 										};
 										
 										$.getJSON("/orcamento/incluirQuadro?" + parametros, dados, function(json) {
+// 											var parametros = '';
+// 											alert(json.parametros);
+// 											for(var i = 0 ; i < json.parametros.size ; i ++) {
+// 												parametros += json.parametros[i].nome + ', ';
+// 											}
+// 											parametros = parametros.substring(0, parametros.length - 2);
 											$("#table-quadros").append($('<tr>').attr('id', 'tr-quadro-' + json.id)
 												.append($('<td>').append(json.nome))
+												.append($('<td>').append(''))
 												.append($('<td>').append(json.valorTotal))
+												.append($('<td>').append(json.quantidadeAmostras))
 												.append($('<td>')
 														.append($('<a>').attr('href', '#').attr('title', 'Excluir quadro').click(function(){ deletarQuadro(json.id);})
 																.append($('<img>').attr('src', '${pageContext.request.contextPath}/imagens/excluir.png')))));
@@ -196,11 +227,7 @@
 											document.getElementById("valorTotal").value = Number(0.0).toFixed(2);
 											document.getElementById("nomeQuadro").value = "";
 											alert("Quadro incluido com sucesso!");
-											numeroQuadro++;
-											document.getElementById("nomeQuadro").value = "Quadro " + numeroQuadro;
 										});
-									} else {
-										alert("Selecione alguns parametros para incluir o quadro!");
 									}
 								}
 								
@@ -229,16 +256,23 @@
 						class="table table-striped table-bordered table-condensed">
 						<tr>
 							<th>Quadro</th>
+							<th>Par&acirc;metros</th>
 							<th>Valor (R$)</th>
+							<th>Quantidade Amostras</th>
 							<th>A&ccedil;&otilde;es</th>
 						</tr>
 						<c:if test="${not empty orcamento.quadros}">
 							<c:forEach items="${orcamento.quadros }" var="quadroFor">
 								<tr id="tr-quadro-${quadroFor.id }">
+									<td>${quadroFor.nome }</td>
 									<td>
-										${quadroFor.nome }
+										<c:forEach items="${quadroFor.parametros }" var="parametroQuadro">
+											${parametroQuadro.nome } ,
+										</c:forEach> 
+										
 									</td>
 									<td>${quadroFor.valorTotal }</td>
+									<td>${quadroFor.quantidadeAmostras }</td>
 									<td><a
 										href="#" onclick="deletarQuadro(${quadroFor.id });"><img
 											src="${pageContext.request.contextPath}/imagens/excluir.png" title="Excluir registro" /></a></td>
@@ -252,7 +286,13 @@
 
 		<div class="control-group">
 			<div class="controls">
-				$
+				<input type="text" name="orcamento.valorColeta" placeholder="Valor da Coleta" value="${orcamento.valorColeta }" class="money1"/>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<div class="controls">
+				<input type="text" name="orcamento.valorKM" placeholder="KM rodado (R$) x kilometragem" value="${orcamento.valorKM }" class="money1"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -265,8 +305,20 @@
 <script
 	src="${pageContext.request.contextPath}/javascripts/jquery.mask.min.js"></script>
 <script type="text/javascript">
-	document.getElementById("nomeQuadro").value = "Quadro " + numeroQuadro;
-	
+	$(document).ready(function() {
+		$('.integer').mask("##0", {
+			reverse : true,
+			maxlength : true
+		});
+		
+		$('.money1').mask("###.##0,00", {
+			reverse : true,
+			maxlength : true
+		});
+		
+	});
+
+
 	function deletarQuadro(id) {
 		alert(id);
 		$.getJSON("/orcamentos/deletarQuadro/" + id, function(json) {

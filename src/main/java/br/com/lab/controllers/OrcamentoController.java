@@ -38,16 +38,14 @@ public class OrcamentoController {
     private final QuadroOrcamentoRepository quadroOrcamentoRepository;
     private final ClienteRepository clienteRepository;
     private final ParametroRepository parametroRepository;
-    private final HttpServletRequest request;
     private final SequenciadorOrcamentoRepository sequenciadorOrcamentoRepository;
 
-    public OrcamentoController(HttpServletRequest request, Result result, OrcamentoRepository repository,
+    public OrcamentoController(Result result, OrcamentoRepository repository,
             Validator validator, QuadroOrcamentoRepository quadroOrcamentoRepository,
-            ClienteRepository clienteRepository, ParametroRepository parametroRepository, SequenciadorOrcamentoRepository sequenciadorOrcamentoRepository) {
-        this.request = request;
+            ClienteRepository clienteRepository, ParametroRepository parametroRepository,
+            SequenciadorOrcamentoRepository sequenciadorOrcamentoRepository) {
         this.result = result;
         this.repository = repository;
-
         this.validator = validator;
         this.quadroOrcamentoRepository = quadroOrcamentoRepository;
         this.clienteRepository = clienteRepository;
@@ -126,7 +124,8 @@ public class OrcamentoController {
 
     public void incluirQuadro(QuadroOrcamento quadro) {
         quadroOrcamentoRepository.create(quadro);
-        result.use(Results.json()).withoutRoot().from(quadro).serialize();
+        QuadroOrcamento retorno = quadroOrcamentoRepository.find(quadro.getId());
+        result.use(Results.json()).withoutRoot().from(retorno).recursive().serialize();
     }
 
     @Get("/orcamentos/page/{pgAtual}")
@@ -139,11 +138,11 @@ public class OrcamentoController {
     protected void paginar(int pgAtual, int qtdRegistros) {
         PaginadorHelper.paginar(result, pgAtual, qtdRegistros, repository.getQuantidadeRegistros());
     }
-    
+
     @Get("/orcamentos/deletarQuadro/{quadroOrcamento.id}")
     public void destroy(QuadroOrcamento quadroOrcamento) {
         quadroOrcamentoRepository.destroy(quadroOrcamentoRepository.find(quadroOrcamento.getId()));
-        result.use(Results.json()).withoutRoot().from(quadroOrcamento).serialize();  
+        result.use(Results.json()).withoutRoot().from(quadroOrcamento).serialize();
     }
 
 }

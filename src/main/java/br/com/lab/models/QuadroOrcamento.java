@@ -3,6 +3,7 @@ package br.com.lab.models;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -16,6 +17,16 @@ public class QuadroOrcamento extends Entity {
 
     @ManyToOne
     private Orcamento orcamento;
+
+    private int quantidadeAmostras;
+
+    public int getQuantidadeAmostras() {
+        return quantidadeAmostras;
+    }
+
+    public void setQuantidadeAmostras(int quantidadeAmostras) {
+        this.quantidadeAmostras = quantidadeAmostras;
+    }
 
     private BigDecimal valorTotal;
 
