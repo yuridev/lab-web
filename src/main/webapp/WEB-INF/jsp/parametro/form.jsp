@@ -1,5 +1,5 @@
 <form class="form-horizontal"
-	action="${pageContext.request.contextPath}/parametros/page/1" method="post">
+	action="${pageContext.request.contextPath}/parametros" method="post">
 	<fieldset>
 		<c:if test="${not empty parametro.id}">
 			<input type="hidden" name="parametro.id" value="${parametro.id}" />

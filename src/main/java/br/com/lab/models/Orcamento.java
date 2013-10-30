@@ -7,7 +7,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 @javax.persistence.Entity
 public class Orcamento extends Entity {
@@ -25,6 +28,9 @@ public class Orcamento extends Entity {
     
     private BigDecimal valorKM;
     private BigDecimal valorColeta;
+    
+    private Integer diasValidade;
+    
 
     public BigDecimal getValorKM() {
         return valorKM;
@@ -88,6 +94,14 @@ public class Orcamento extends Entity {
 
     public void setHoraAtualizacao(LocalTime horaAtualizacao) {
         this.horaAtualizacao = horaAtualizacao;
+    }
+
+    public Integer getDiasValidade() {
+        return diasValidade;
+    }
+
+    public void setDiasValidade(Integer diasValidade) {
+        this.diasValidade = diasValidade;
     }
 
 }

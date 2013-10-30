@@ -7,7 +7,7 @@ public interface SequenciadorOrcamentoRepository {
 	 * Delete the methods you don't want to expose
 	 */
 	 
-	void create(SequenciadorOrcamento entity);
+    SequenciadorOrcamento update(SequenciadorOrcamento entity);
 	
 	SequenciadorOrcamento getNext();
 	

@@ -25,13 +25,13 @@ public class SequenciadorOrcamentoRepositoryImpl extends Repository<Sequenciador
         criteria.addOrder(Order.desc("id"));
         criteria.setMaxResults(1);
         SequenciadorOrcamento seq = (SequenciadorOrcamento) criteria.uniqueResult();
+        SequenciadorOrcamento retorno = new SequenciadorOrcamento();
         if (seq == null) {
-            seq = new SequenciadorOrcamento();
-            seq.setNumero(1);
-            seq.setData(anoAtual);
+            retorno.setNumero(1);
         } else {
-            seq.setNumero(seq.getNumero() + 1);
+            retorno.setNumero(seq.getNumero() + 1);
         }
-        return seq;
+        retorno.setData(anoAtual);
+        return retorno;
     }
 }

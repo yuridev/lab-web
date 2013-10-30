@@ -38,7 +38,7 @@ public class ParametroController {
         validator.validate(parametro);
         validator.onErrorUsePageOf(this).newParametro();
         repository.create(parametro);
-        result.redirectTo(this).index();
+        result.redirectTo(this).index(1);
     }
 
     @Get("/parametros/new")
@@ -51,7 +51,7 @@ public class ParametroController {
         validator.validate(parametro);
         validator.onErrorUsePageOf(this).edit(parametro);
         repository.update(parametro);
-        result.redirectTo(this).index();
+        result.redirectTo(this).index(1);
     }
 
     @Get("/parametros/{parametro.id}/edit")
@@ -68,7 +68,7 @@ public class ParametroController {
     @Get("/parametros/delete/{parametro.id}")
     public void destroy(Parametro parametro) {
         repository.destroy(repository.find(parametro.getId()));
-        result.redirectTo(this).index();
+        result.redirectTo(this).index(1);
     }
 
     @Get("/parametros/page/{pgAtual}")

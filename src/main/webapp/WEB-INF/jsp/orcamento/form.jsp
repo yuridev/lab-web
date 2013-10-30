@@ -1,5 +1,6 @@
 <script type="text/javascript">
 	var precos = [];
+	var parametrosAux = '';
 </script>
 
 <form action="${pageContext.request.contextPath}/orcamentos"
@@ -118,6 +119,7 @@
 									var idParametro = $("#orcamento-parametros option:selected").val();
 									var precoParametro = precos[idParametro];
 									var incluir = true;
+									parametrosAux += valor + ", ";
 									
 									if(idParametro == 0) {
 										alert("Selecione um paramâtro para ser adicionado.");
@@ -161,7 +163,7 @@
 								
 								
 								function removerParametro(item, idParametro) {
-									var campoValorAtual = document.getElementById("valorTotal");
+									var campoValorAtual = $("input=[id=valorTotal]");
 									var valorFinal = 0.0;
 									valorFinal = parseFloat(campoValorAtual.value.replace(",", ".")) - precos[idParametro];
 									campoValorAtual.value = Number(valorFinal).toFixed(2);
@@ -209,12 +211,7 @@
 										};
 										
 										$.getJSON("/orcamento/incluirQuadro?" + parametros, dados, function(json) {
-// 											var parametros = '';
-// 											alert(json.parametros);
-// 											for(var i = 0 ; i < json.parametros.size ; i ++) {
-// 												parametros += json.parametros[i].nome + ', ';
-// 											}
-// 											parametros = parametros.substring(0, parametros.length - 2);
+											parametrosAux = parametrosAux.substring(0, parametrosAux.length - 2);
 											$("#table-quadros").append($('<tr>').attr('id', 'tr-quadro-' + json.id)
 												.append($('<td>').append(json.nome))
 												.append($('<td>').append(''))
@@ -286,18 +283,38 @@
 
 		<div class="control-group">
 			<div class="controls">
-				<input type="text" name="orcamento.valorColeta" placeholder="Valor da Coleta" value="${orcamento.valorColeta }" class="money1"/>
+				<input type="text" name="orcamento.valorColeta" placeholder="Valor da Coleta" value="${orcamento.valorColeta }" class="money1" required="required"/>
 			</div>
 		</div>
 		
 		<div class="control-group">
 			<div class="controls">
-				<input type="text" name="orcamento.valorKM" placeholder="KM rodado (R$) x kilometragem" value="${orcamento.valorKM }" class="money1"/>
+				<input type="text" name="orcamento.valorKM" placeholder="KM rodado (R$) x kilometragem" value="${orcamento.valorKM }" class="money1" required="required"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<div class="controls">
-				<button class="btn btn-success">Salvar</button>
+				<input type="text" name="orcamento.diasValidade" placeholder="Dias de validade" value="${orcamento.diasValidade == 0 ? "" : orcamento.diasValidade}" class="integer" required="required"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+				<fieldset>
+					<legend>Total or&ccedil;amento</legend>
+					<h1>
+						<c:if test="${ not empty orcamento.valorTotal }">
+						R$
+						</c:if>
+						<span id="valorTotalOrcamento" class="money3">${ orcamento.valorTotal }</span>
+					</h1>
+					<input type="hidden" name="orcamento.valorTotal" value="${ orcamento.valorTotal }"/>
+				</fieldset>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+				<button class="btn btn-success">Salvar / Calcular Or&ccedil;amento</button>
+<%-- 				<a class="btn btn-warning" onclick="calcularValorTotalOrcamento('${orcamento.id}');" href="#">Calcular Or&ccedil;amento</a> --%>
 			</div>
 		</div>
 </form>
@@ -316,13 +333,24 @@
 			maxlength : true
 		});
 		
+		$('.money3').mask("##.#00,00", {
+			reverse : true,
+			maxlength : false
+		});
+		
 	});
 
 
+// 	function calcularValorTotalOrcamento(id) {
+// 		$.getJSON("/orcamentos/getValorTotal/" + id, function(json) {
+// 			var valorTotalOrcamento = Number(json).toFixed(2);
+// 			$("#valorTotalOrcamento").text("R$ " + valorTotalOrcamento);
+// 			$("input[name=orcamento.valorTotal]").text(valorTotalOrcamento);
+// 		});
+// 	}
+	
 	function deletarQuadro(id) {
-		alert(id);
 		$.getJSON("/orcamentos/deletarQuadro/" + id, function(json) {
-			alert(json.id);
 			$('#tr-quadro-'+json.id).remove();
 		});
 	}
