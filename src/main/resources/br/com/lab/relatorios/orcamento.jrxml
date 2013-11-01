@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="orcamento" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4b059994-62a9-44d6-915f-e6cc0d93997d">
 	<property name="ireport.zoom" value="1.7715610000000022"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="589"/>
+	<property name="ireport.y" value="969"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -46,8 +46,11 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\Yuri\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="orcamento_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[SELECT
+		<![CDATA[SELECT DISTINCT
      orcamento.`diasValidade` AS orcamento_diasValidade,
      orcamento.`horaAtualizacao` AS orcamento_horaAtualizacao,
      orcamento.`numero` AS orcamento_numero,
@@ -62,23 +65,12 @@
      cliente.`nome` AS cliente_nome,
      cliente.`telefone` AS cliente_telefone,
      cliente.`estado` AS cliente_estado,
-     quadroorcamento.`id` AS quadroorcamento_id,
-     quadroorcamento.`nome` AS quadroorcamento_nome,
-     quadroorcamento.`quantidadeAmostras` AS quadroorcamento_quantidadeAmostras,
-     quadroorcamento.`valorTotal` AS quadroorcamento_valorTotal,
-     quadroorcamento_parametro.`QuadroOrcamento_id` AS quadroorcamento_parametro_QuadroOrcamento_id,
-     quadroorcamento_parametro.`parametros_id` AS quadroorcamento_parametro_parametros_id,
-     parametro.`ld` AS parametro_ld,
-     parametro.`metodo` AS parametro_metodo,
-     parametro.`nome` AS parametro_nome,
-     parametro.`unidadeMedida` AS parametro_unidadeMedida
+     quadroorcamento.`id` AS quadroorcamento_id
 FROM
      `cliente` cliente INNER JOIN `orcamento` orcamento ON cliente.`id` = orcamento.`cliente_id`
      INNER JOIN `quadroorcamento` quadroorcamento ON orcamento.`id` = quadroorcamento.`orcamento_id`
-     INNER JOIN `quadroorcamento_parametro` quadroorcamento_parametro ON quadroorcamento.`id` = quadroorcamento_parametro.`QuadroOrcamento_id`
-     INNER JOIN `parametro` parametro ON quadroorcamento_parametro.`parametros_id` = parametro.`id`
-
-WHERE orcamento.`id` = 1]]>
+WHERE
+     orcamento.`id` = $P{orcamento_id}]]>
 	</queryString>
 	<field name="orcamento_diasValidade" class="java.lang.Integer"/>
 	<field name="orcamento_horaAtualizacao" class="java.lang.Object"/>
@@ -95,45 +87,11 @@ WHERE orcamento.`id` = 1]]>
 	<field name="cliente_telefone" class="java.lang.String"/>
 	<field name="cliente_estado" class="java.lang.Integer"/>
 	<field name="quadroorcamento_id" class="java.lang.Long"/>
-	<field name="quadroorcamento_nome" class="java.lang.String"/>
-	<field name="quadroorcamento_quantidadeAmostras" class="java.lang.Integer"/>
-	<field name="quadroorcamento_valorTotal" class="java.math.BigDecimal"/>
-	<field name="quadroorcamento_parametro_QuadroOrcamento_id" class="java.lang.Long"/>
-	<field name="quadroorcamento_parametro_parametros_id" class="java.lang.Long"/>
-	<field name="parametro_ld" class="java.lang.String"/>
-	<field name="parametro_metodo" class="java.lang.String"/>
-	<field name="parametro_nome" class="java.lang.String"/>
-	<field name="parametro_unidadeMedida" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="650" splitType="Stretch">
-			<textField>
-				<reportElement uuid="8097d7d0-edde-43bb-84a0-91724d6b6abc" x="294" y="35" width="199" height="20" forecolor="#336531"/>
-				<textElement>
-					<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{orcamento_numero}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="83c9e6c7-f0e9-4657-84bb-d9d532fbef19" x="205" y="15" width="288" height="20" forecolor="#336531"/>
-				<textElement>
-					<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[PROPOSTA TÉCNICA COMERCIAL]]></text>
-			</staticText>
-			<image>
-				<reportElement uuid="a70c4691-d27b-401d-8f8e-72d762b4a072" x="44" y="15" width="267" height="70"/>
-				<imageExpression><![CDATA["C:\\Users\\Yuri\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\kbf_logo.png"]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement uuid="69a68aa4-0423-450e-87c4-0731b690b8c5" x="205" y="35" width="37" height="20" forecolor="#336531"/>
-				<textElement>
-					<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Nº]]></text>
-			</staticText>
+		<band height="639" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="14658d3d-c52e-4234-8d92-0fa6e2310acb" x="43" y="130" width="26" height="15"/>
 				<textElement>
@@ -289,7 +247,7 @@ WHERE orcamento.`id` = 1]]>
 				<text><![CDATA[Realizar análises  físico-químicas/e ou microbiológicas para controle da qualidade e/ou eficiência dos processos produtivos ou ambientais.]]></text>
 			</staticText>
 			<image scaleImage="RealSize" hAlign="Center">
-				<reportElement uuid="857cfb98-36e6-456b-8f6d-229f0cc34a16" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="566" width="555" height="83"/>
+				<reportElement uuid="857cfb98-36e6-456b-8f6d-229f0cc34a16" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="538" width="555" height="83"/>
 				<imageExpression><![CDATA["C:\\Users\\Yuri\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\rodape.png"]]></imageExpression>
 			</image>
 			<staticText>
@@ -306,24 +264,91 @@ WHERE orcamento.`id` = 1]]>
 				</textElement>
 				<text><![CDATA[Realização de análises em água do efluente industrial para controle de qualidade físico-químicos, contemplando os seguintes parâmetros citados nos quadros abaixo:]]></text>
 			</staticText>
+			<elementGroup>
+				<staticText>
+					<reportElement uuid="69a68aa4-0423-450e-87c4-0731b690b8c5" x="250" y="60" width="37" height="20" forecolor="#336531"/>
+					<textElement>
+						<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Nº]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="83c9e6c7-f0e9-4657-84bb-d9d532fbef19" x="250" y="40" width="288" height="20" forecolor="#336531"/>
+					<textElement>
+						<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[PROPOSTA TÉCNICA COMERCIAL]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="8097d7d0-edde-43bb-84a0-91724d6b6abc" x="339" y="60" width="199" height="20" forecolor="#336531"/>
+					<textElement>
+						<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{orcamento_numero}]]></textFieldExpression>
+				</textField>
+				<image>
+					<reportElement uuid="1ee3296c-3eac-4f93-b92a-53ae3f70ced6" x="43" y="15" width="227" height="78"/>
+					<imageExpression><![CDATA["C:\\Users\\Yuri\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\logokbf.jpg"]]></imageExpression>
+				</image>
+			</elementGroup>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="17" splitType="Stretch"/>
+		<band height="78" splitType="Stretch">
+			<image>
+				<reportElement uuid="260c875a-5ebb-44b6-a0f5-c12b1b27cb42" x="33" y="0" width="227" height="78"/>
+				<imageExpression><![CDATA["C:\\Users\\Yuri\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\logokbf.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="44b14577-f641-42b3-9442-92b9e97cc2ac" x="232" y="27" width="288" height="20" forecolor="#336531"/>
+				<textElement>
+					<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[PROPOSTA TÉCNICA COMERCIAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="3b193154-8612-4ce5-b2c7-4d13ebc90500" x="321" y="47" width="199" height="20" forecolor="#336531"/>
+				<textElement>
+					<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{orcamento_numero}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d9c146d1-95c4-41b7-807a-d759bb50cc50" x="232" y="47" width="37" height="20" forecolor="#336531"/>
+				<textElement>
+					<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="18" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="259" splitType="Stretch"/>
+		<band height="17" splitType="Stretch">
+			<subreport>
+				<reportElement uuid="f870a088-dffb-44e3-a283-b8afbf50138d" x="69" y="0" width="265" height="17"/>
+				<subreportParameter name="quadroorcamento_id">
+					<subreportParameterExpression><![CDATA[$F{quadroorcamento_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "quadro_orcamento.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="85" splitType="Stretch">
+			<image scaleImage="RealSize" hAlign="Center">
+				<reportElement uuid="4883d7f0-d0db-4251-ae51-064656acf90b" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="83"/>
+				<imageExpression><![CDATA["C:\\Users\\Yuri\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\rodape.png"]]></imageExpression>
+			</image>
+		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="99" splitType="Stretch"/>
 	</summary>
 </jasperReport>
