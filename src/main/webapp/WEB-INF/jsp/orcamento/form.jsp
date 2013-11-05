@@ -214,7 +214,7 @@
 											parametrosAux = parametrosAux.substring(0, parametrosAux.length - 2);
 											$("#table-quadros").append($('<tr>').attr('id', 'tr-quadro-' + json.id)
 												.append($('<td>').append(json.nome))
-												.append($('<td>').append(''))
+												.append($('<td>').append(parametrosAux))
 												.append($('<td>').append(json.valorTotal))
 												.append($('<td>').append(json.quantidadeAmostras))
 												.append($('<td>')
@@ -223,6 +223,7 @@
 											$("#listaParametros").empty();
 											document.getElementById("valorTotal").value = Number(0.0).toFixed(2);
 											document.getElementById("nomeQuadro").value = "";
+											parametrosAux = '';
 											alert("Quadro incluido com sucesso!");
 										});
 									}
@@ -263,10 +264,13 @@
 								<tr id="tr-quadro-${quadroFor.id }">
 									<td>${quadroFor.nome }</td>
 									<td>
+										<c:set scope="page" var="virgula"/>
+										<span>
 										<c:forEach items="${quadroFor.parametros }" var="parametroQuadro">
-											${parametroQuadro.nome } ,
+											${virgula }&nbsp;${parametroQuadro.nome }
+											<c:set var="virgula" value=","/>
 										</c:forEach> 
-										
+										</span>
 									</td>
 									<td>${quadroFor.valorTotal }</td>
 									<td>${quadroFor.quantidadeAmostras }</td>
@@ -307,7 +311,6 @@
 						</c:if>
 						<span id="valorTotalOrcamento" class="money3">${ orcamento.valorTotal }</span>
 					</h1>
-					<input type="hidden" name="orcamento.valorTotal" value="${ orcamento.valorTotal }"/>
 				</fieldset>
 			</div>
 		</div>
@@ -341,14 +344,6 @@
 	});
 
 
-// 	function calcularValorTotalOrcamento(id) {
-// 		$.getJSON("/orcamentos/getValorTotal/" + id, function(json) {
-// 			var valorTotalOrcamento = Number(json).toFixed(2);
-// 			$("#valorTotalOrcamento").text("R$ " + valorTotalOrcamento);
-// 			$("input[name=orcamento.valorTotal]").text(valorTotalOrcamento);
-// 		});
-// 	}
-	
 	function deletarQuadro(id) {
 		$.getJSON("/orcamentos/deletarQuadro/" + id, function(json) {
 			$('#tr-quadro-'+json.id).remove();

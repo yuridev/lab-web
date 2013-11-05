@@ -64,8 +64,8 @@ public class Cliente extends Entity {
         return endereco;
     }
 
-    public void setEndereco(String endereço) {
-        this.endereco = endereço;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public String getCidade() {
