@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="quadro_orcamento" language="groovy" pageWidth="403" pageHeight="720" columnWidth="403" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="767f829a-a690-46ca-9642-a2b8f75ffcd3">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="quadro_orcamento" pageWidth="399" pageHeight="720" columnWidth="399" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="767f829a-a690-46ca-9642-a2b8f75ffcd3">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -28,63 +28,47 @@
 		</box>
 	</style>
 	<subDataset name="Table Dataset 1" uuid="5e16f1a7-2e47-4873-a56f-518937d4d472"/>
-	<parameter name="quadroorcamento_id" class="java.lang.String"/>
+	<parameter name="quadros" class="java.util.Collection" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{quadros}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Yuri\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\"]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[SELECT
-     p.`id` AS p_id,
-     p.`ld` AS p_ld,
-     p.`metodo` AS p_metodo,
-     p.`nome` AS p_nome,
-     p.`unidadeMedida` AS p_unidadeMedida,
-     q.`nome` AS q_nome,
-     q.`valorTotal` AS q_valorTotal,
-     q.`orcamento_id` AS q_orcamento_id,
-     qp.`parametros_id` AS qp_parametros_id,
-     qp.`QuadroOrcamento_id` AS qp_QuadroOrcamento_id
-FROM
-     `quadroorcamento_parametro` qp INNER JOIN `quadroorcamento` q ON qp.`quadroorcamento_id` = q.`id`
-     INNER JOIN `parametro` p ON qp.`parametros_id` = p.`id`
-WHERE
-     q.id = $P{quadroorcamento_id}]]>
+		<![CDATA[]]>
 	</queryString>
-	<field name="p_id" class="java.lang.Long"/>
-	<field name="p_ld" class="java.lang.String"/>
-	<field name="p_metodo" class="java.lang.String"/>
-	<field name="p_nome" class="java.lang.String"/>
-	<field name="p_unidadeMedida" class="java.lang.String"/>
-	<field name="q_nome" class="java.lang.String"/>
-	<field name="q_valorTotal" class="java.math.BigDecimal"/>
-	<field name="q_orcamento_id" class="java.lang.Long"/>
-	<field name="qp_parametros_id" class="java.lang.Long"/>
-	<field name="qp_QuadroOrcamento_id" class="java.lang.Long"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="parametros" class="java.util.List"/>
+	<field name="valorTotal" class="java.math.BigDecimal"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="46" splitType="Stretch">
-			<textField>
-				<reportElement uuid="ef1cdbed-baa6-4b2b-b07e-3cc9489474a0" x="154" y="13" width="100" height="20"/>
-				<textElement>
-					<font fontName="Calibri" size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{q_nome}]]></textFieldExpression>
-			</textField>
-		</band>
+		<band splitType="Stretch"/>
 	</title>
 	<pageHeader>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="59" splitType="Stretch">
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="112" splitType="Stretch">
+			<subreport>
+				<reportElement uuid="8929e4be-7927-49a4-841d-7d93f9459c25" x="1" y="91" width="397" height="20"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{parametros})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "parametros_quadro.jasper"]]></subreportExpression>
+			</subreport>
 			<staticText>
-				<reportElement uuid="fc5ede68-4e3e-4b8e-a3d9-34653f12cf6e" style="table_TH" mode="Opaque" x="3" y="0" width="100" height="59">
+				<reportElement uuid="fc5ede68-4e3e-4b8e-a3d9-34653f12cf6e" style="table_TH" mode="Opaque" x="1" y="33" width="100" height="59">
 					<property name="net.sf.jasperreports.export.pdf.tag.th" value="full"/>
 				</reportElement>
-				<box leftPadding="1" rightPadding="1">
+				<box leftPadding="0" rightPadding="1">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -93,12 +77,12 @@ WHERE
 				<text><![CDATA[Parametro]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="9bd8194b-fd85-43e5-a3f8-aebaf87566c5" style="table_TH" mode="Opaque" x="203" y="0" width="78" height="59"/>
-				<box leftPadding="1" rightPadding="1">
+				<reportElement uuid="9bd8194b-fd85-43e5-a3f8-aebaf87566c5" style="table_TH" mode="Opaque" x="201" y="33" width="78" height="59"/>
+				<box leftPadding="0" rightPadding="1">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -107,12 +91,12 @@ WHERE
 				<text><![CDATA[LD]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="13fd7809-186a-40cb-95b4-14635b186cc6" style="table_TH" mode="Opaque" x="281" y="0" width="119" height="59"/>
-				<box leftPadding="1" rightPadding="1">
+				<reportElement uuid="13fd7809-186a-40cb-95b4-14635b186cc6" style="table_TH" mode="Opaque" x="279" y="33" width="119" height="59"/>
+				<box leftPadding="0" rightPadding="1">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -121,12 +105,12 @@ WHERE
 				<text><![CDATA[Método]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="e6cb0927-370e-455e-9c9d-d05d3920474a" style="table_TH" mode="Opaque" x="103" y="0" width="100" height="59"/>
-				<box leftPadding="1" rightPadding="1">
+				<reportElement uuid="e6cb0927-370e-455e-9c9d-d05d3920474a" style="table_TH" mode="Opaque" x="101" y="33" width="100" height="59"/>
+				<box leftPadding="0" rightPadding="1">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -134,65 +118,37 @@ WHERE
 				</textElement>
 				<text><![CDATA[Unidade Medida]]></text>
 			</staticText>
+			<textField>
+				<reportElement uuid="ef1cdbed-baa6-4b2b-b07e-3cc9489474a0" x="4" y="13" width="395" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
 		</band>
-	</columnHeader>
-	<detail>
-		<band height="20" splitType="Stretch">
-			<textField>
-				<reportElement uuid="ed66ebe3-7fe4-4428-9289-1c322bc588ad" x="203" y="0" width="78" height="20"/>
-				<box>
-					<pen lineWidth="0.75"/>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Justified">
-					<paragraph leftIndent="4"/>
+		<band height="22">
+			<staticText>
+				<reportElement uuid="5dd60f8e-3898-462f-8e69-b97f6257b103" x="98" y="2" width="64" height="20" forecolor="#336531"/>
+				<textElement textAlignment="Right">
+					<font fontName="Century Schoolbook" size="12" isBold="false" isItalic="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{p_ld}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="af29d1f4-5c07-420e-826a-285b76a9c480" x="281" y="0" width="119" height="20"/>
-				<box>
-					<pen lineWidth="0.75"/>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Justified">
-					<paragraph leftIndent="4"/>
+				<text><![CDATA[Total: R$
+
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a74590ab-9c1d-4554-be33-2c8ff9bb54d7" x="212" y="2" width="115" height="20" forecolor="#336531"/>
+				<textElement>
+					<font fontName="Century Schoolbook" size="12" isBold="false" isItalic="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{p_metodo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="0967b60e-d16e-4352-8f92-bb45660ba318" x="3" y="0" width="100" height="20"/>
-				<box>
-					<pen lineWidth="0.75"/>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Justified">
-					<paragraph leftIndent="4"/>
+				<text><![CDATA[por amostra.]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="75bd7ae2-8f18-48b7-ac45-a64a4aaa26bb" x="162" y="2" width="50" height="20" forecolor="#336531"/>
+				<textElement textAlignment="Center">
+					<font fontName="Century Schoolbook" size="12" isBold="false" isItalic="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{p_nome}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="399e17c1-23be-4683-b0d4-3617bd3e7a13" x="103" y="0" width="100" height="20"/>
-				<box>
-					<pen lineWidth="0.75"/>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Justified">
-					<paragraph leftIndent="4"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{p_unidadeMedida}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{valorTotal}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -203,30 +159,6 @@ WHERE
 		<band splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="29" splitType="Stretch">
-			<staticText>
-				<reportElement uuid="5dd60f8e-3898-462f-8e69-b97f6257b103" x="88" y="9" width="53" height="20" forecolor="#336531"/>
-				<textElement>
-					<font fontName="Century Schoolbook" size="12" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Total: R$
-
-]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="a647f470-ca5e-4b50-8de6-521d4604ce41" x="141" y="9" width="50" height="20" forecolor="#336531"/>
-				<textElement textAlignment="Right">
-					<font fontName="Century Schoolbook" size="12" isItalic="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{q_valorTotal}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="a74590ab-9c1d-4554-be33-2c8ff9bb54d7" x="191" y="9" width="115" height="20" forecolor="#336531"/>
-				<textElement>
-					<font fontName="Century Schoolbook" size="12" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[por amostra.]]></text>
-			</staticText>
-		</band>
+		<band splitType="Stretch"/>
 	</summary>
 </jasperReport>

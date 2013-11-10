@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cliente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="84c91242-a378-486b-8f5b-2f37d5f59a6c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="parameter1" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM cliente WHERE id = 1]]>
+	</queryString>
+	<field name="cidade" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cpfCnpj" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="endereco" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estado" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefone" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="720" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5d82ae6e-927c-432f-805c-281728394825" x="102" y="314" width="269" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Rua 62, no 22, Qd. 135, Lt. 1E, Setor Central, Goiânia - GO.]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="aed5e317-30cc-49d5-bf02-7552eadc99a8" x="105" y="150" width="116" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="ab8d806b-1640-40e6-b4c3-796532314494" x="54" y="410" width="452" height="20" forecolor="#336531"/>
+				<textElement>
+					<font fontName="Century Schoolbook" size="11" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[1. OBJETIVO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a572a118-9288-4f65-b7b2-e193970634f5" x="53" y="192" width="50" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefone:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1aa6f823-f90e-4410-9fe5-94ad85230627" x="112" y="272" width="283" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[KBF Comércio e Serviços Químicos LTDA-ME.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2d6ed15f-271a-4edf-b2f1-158c14150352" x="84" y="293" width="99" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[02.696.439/0001-26]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a8a5b3ec-cc8f-4df3-b709-e38689b932ed" x="260" y="35" width="288" height="20" forecolor="#336531"/>
+				<textElement>
+					<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[PROPOSTA TÉCNICA COMERCIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a82a517d-a9f1-4bb8-b4e3-5683d3523ee3" x="54" y="496" width="452" height="37"/>
+				<textElement>
+					<font fontName="Century Schoolbook" size="11"/>
+				</textElement>
+				<text><![CDATA[Realização de análises em água do efluente industrial para controle de qualidade físico-químicos, contemplando os seguintes parâmetros citados nos quadros abaixo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0af10e2c-9ef5-4b28-9d70-08fa92b26c1f" x="54" y="474" width="452" height="20" forecolor="#336531"/>
+				<textElement>
+					<font fontName="Century Schoolbook" size="11" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[2. SERVIÇOS A SEREM EXECUTADOS]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="2045e873-774a-45dc-baa0-3804c0ceb3cc" x="110" y="171" width="100" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cpfCnpj}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6158d649-a6c7-4636-8a30-cc6d90b27f43" x="53" y="125" width="26" height="15"/>
+				<textElement>
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[A/C:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="32bba140-7800-48e7-8ad2-2eb2319fddf2" x="53" y="272" width="58" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Contratado:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="04815207-a389-45e1-96bb-ac78b0404c07" x="94" y="213" width="100" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f23a8e79-0c9c-4d7e-a592-8472caf2ee0c" x="106" y="234" width="384" height="19"/>
+				<textElement>
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{endereco}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="851371cb-b392-489d-bf40-c457a0e38aa4" x="53" y="314" width="48" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="133f67aa-781a-44db-8f65-c4daccae031d" x="53" y="213" width="40" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-mail:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="83fec790-8252-4874-8a96-b331a738ac89" x="349" y="55" width="199" height="20" forecolor="#336531"/>
+				<textElement>
+					<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{orcamento_numero}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e11abde0-6415-4ade-bbc9-ad16a25fff2a" x="53" y="150" width="51" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Empresa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="635b47e8-9de0-4b2c-a189-d2a33fc84675" x="53" y="171" width="55" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[CNPJ/CPF:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cb5ba6c5-9559-4b50-af3a-0bf85b8e29e1" x="53" y="234" width="52" height="19"/>
+				<textElement>
+					<font fontName="Calibri" size="11" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="dd0fae92-ab8c-43b0-b907-2d2a3d6c833c" x="104" y="192" width="116" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="bfdaa6f6-dac3-48ea-8f17-fac98acb22d7" x="53" y="10" width="227" height="78"/>
+				<imageExpression><![CDATA["C:\\Users\\Yuri\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\logokbf.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="aefe4023-11d2-4f6f-9644-a626c065cc4d" x="54" y="432" width="452" height="37"/>
+				<textElement>
+					<font fontName="Century Schoolbook" size="11"/>
+				</textElement>
+				<text><![CDATA[Realizar análises  físico-químicas/e ou microbiológicas para controle da qualidade e/ou eficiência dos processos produtivos ou ambientais.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b7a0239a-b2a2-497f-953a-687c4a70d62f" x="102" y="335" width="269" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[(062)3213-5078 / 8158-60-47]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dcbd6836-0db4-48d9-a2df-605510898a0c" x="53" y="293" width="30" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[CNPJ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="45b04988-3704-425d-8fb6-4a43fb4bf8f0" x="260" y="55" width="37" height="20" forecolor="#336531"/>
+				<textElement>
+					<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+			<image scaleImage="RealSize" hAlign="Center">
+				<reportElement uuid="c7ae2f5f-d7d5-4b36-8dc6-adb422c490a0" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="637" width="555" height="83"/>
+				<imageExpression><![CDATA["C:\\Users\\Yuri\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\rodape.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="d8a0d1eb-e7a7-4289-a4dc-31179f11054c" x="53" y="335" width="48" height="20"/>
+				<textElement>
+					<font fontName="Calibri" size="11" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Telefone:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c8f1f101-2920-458c-87ef-356f1a169d00" x="54" y="383" width="452" height="20"/>
+				<textElement>
+					<font fontName="Century Schoolbook" size="11"/>
+				</textElement>
+				<text><![CDATA[Conforme solicitado por Vossa Senhoria, segue abaixo a proposta técnica/ comercial:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
