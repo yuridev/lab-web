@@ -122,16 +122,16 @@
 									parametrosAux += valor + ", ";
 									
 									if(idParametro == 0) {
-										alert("Selecione um paramâtro para ser adicionado.");
+										alert("Selecione um par\u00e2metro para ser adicionado.");
 										incluir = false;
 									}
 									if(precoParametro == 0) {
-										alert("Parametro sem preço!");
+										alert("Parametro sem pre\u00e7o!");
 										incluir = false;
 									}
 									$("input[name=parametros]").each(function(index, obj){
 										if(idParametro == obj.value) {
-											alert("Parâmetro já adicionado, escolha outro parâmetro!");
+											alert("Par\u00e2metro j\u00e1 adicionado, escolha outro par\u00e2metro!");
 											incluir = false;
 										}
 									});
@@ -198,7 +198,7 @@
 									}
 										
 									if(quantidadeAmostras == '' && incluir) {
-										alert("Campo quantidade de amostras é de preenchimento obrigatório.");
+										alert("Campo quantidade de amostras \u00e9 de preenchimento obrigat\u00f3rio.");
 										$("#quantidadeAmostras").focus();
 										incluir = false;
 									}
@@ -231,7 +231,7 @@
 								
 								function validar() {
 									if($("#orcamento-cliente").val() == 0 ) {
-										alert("Campo cliente obrigatorio.");
+										alert("Campo cliente obrigat\u00f3rio.");
 										$("#orcamento-cliente").focus();
 										return false;
 									}
@@ -287,13 +287,13 @@
 
 		<div class="control-group">
 			<div class="controls">
-				<input type="text" name="orcamento.valorColeta" placeholder="Valor da Coleta" value="${orcamento.valorColeta }" class="money1" required="required"/>
+				<input type="text" name="orcamento.valorColeta" placeholder="Valor da Coleta" value="${orcamento.valorColeta }" class="money1" />
 			</div>
 		</div>
 		
 		<div class="control-group">
 			<div class="controls">
-				<input type="text" name="orcamento.valorKM" placeholder="KM rodado (R$) x kilometragem" value="${orcamento.valorKM }" class="money1" required="required"/>
+				<input type="text" name="orcamento.valorKM" placeholder="KM rodado (R$) x kilometragem" value="${orcamento.valorKM }" class="money1" />
 			</div>
 		</div>
 		<div class="control-group">

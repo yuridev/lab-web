@@ -34,12 +34,12 @@
 		<div class="control-group">
 			<div class="controls">
 			<c:if test="${cliente.tipoPessoa == 'PF'}">
-				<input type="hidden" name="cliente.tipoPessoa" value="PF"/>
+				<input type="hidden" name="cliente.tipoPessoa" value="CPF"/>
 				<input name="cliente.cpfCnpj" id="cliente.cpfCnpj" type="text"
 					placeholder="CPF" class="input-xlarge" data-mask="999.999.999-99" required="" value="${cliente.cpfCnpj }" onblur="validar(this.value);">
 			</c:if>
 			<c:if test="${cliente.tipoPessoa != 'PF' }" >
-				<input type="hidden" name="cliente.tipoPessoa" value="PJ"/>
+				<input type="hidden" name="cliente.tipoPessoa" value="CNPJ"/>
 				<input name="cliente.cpfCnpj" id="cliente.cpfCnpj" type="text"
 					placeholder="CNPJ" class="input-xlarge" data-mask="99.999.999/9999-99" required="" value="${cliente.cpfCnpj }" onblur="validar(this.value);">
 			</c:if>

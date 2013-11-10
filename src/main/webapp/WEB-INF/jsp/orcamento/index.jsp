@@ -19,6 +19,9 @@
 				<td>${orcamento.cliente.nome}</td>
 				<td>${orcamento.valorTotal}</td>
 				<td colspan="2">
+				
+					<a target="_blank" href="${pageContext.request.contextPath}/orcamentos/reports/${orcamento.id}"><img src="${pageContext.request.contextPath}/imagens/pdf.png" title="Gerar Orçamento em PDF"/></a>
+				
 					<a href="${pageContext.request.contextPath}/orcamentos/${orcamento.id}/edit"><img src="${pageContext.request.contextPath}/imagens/editar.png" title="Editar registro"/></a>
 
 					<a href="${pageContext.request.contextPath}/orcamentos/delete/${orcamento.id}"><img src="${pageContext.request.contextPath}/imagens/excluir.png" title="Excluir registro"/></a>

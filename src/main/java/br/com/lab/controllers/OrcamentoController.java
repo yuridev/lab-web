@@ -1,12 +1,15 @@
 package br.com.lab.controllers;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -19,6 +22,7 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.view.Results;
+import br.com.lab.helper.GeradorRelatorioHelper;
 import br.com.lab.helpers.PaginadorHelper;
 import br.com.lab.models.Orcamento;
 import br.com.lab.models.QuadroOrcamento;
@@ -28,6 +32,9 @@ import br.com.lab.repositories.OrcamentoRepository;
 import br.com.lab.repositories.ParametroRepository;
 import br.com.lab.repositories.QuadroOrcamentoRepository;
 import br.com.lab.repositories.SequenciadorOrcamentoRepository;
+import br.com.lab.util.CurrencyWriter;
+import br.com.lab.util.DataUtil;
+import br.com.lab.util.LabUtil;
 
 @Resource
 public class OrcamentoController {
@@ -40,10 +47,11 @@ public class OrcamentoController {
     private final ClienteRepository clienteRepository;
     private final ParametroRepository parametroRepository;
     private final SequenciadorOrcamentoRepository sequenciadorOrcamentoRepository;
+    private HttpServletResponse response;
 
     public OrcamentoController(Result result, OrcamentoRepository repository, Validator validator,
             QuadroOrcamentoRepository quadroOrcamentoRepository, ClienteRepository clienteRepository,
-            ParametroRepository parametroRepository, SequenciadorOrcamentoRepository sequenciadorOrcamentoRepository) {
+            ParametroRepository parametroRepository, SequenciadorOrcamentoRepository sequenciadorOrcamentoRepository, HttpServletResponse response) {
         this.result = result;
         this.repository = repository;
         this.validator = validator;
@@ -51,6 +59,7 @@ public class OrcamentoController {
         this.clienteRepository = clienteRepository;
         this.parametroRepository = parametroRepository;
         this.sequenciadorOrcamentoRepository = sequenciadorOrcamentoRepository;
+        this.response = response;
     }
 
     @Get("/orcamentos")
@@ -70,14 +79,20 @@ public class OrcamentoController {
         SequenciadorOrcamento next = sequenciadorOrcamentoRepository.getNext();
         sequenciadorOrcamentoRepository.update(next);
         formatarNumero(orcamento, next);
-        orcamento.setValorTotal(OrcamentoHelper.getValorTotal(orcamento));
-        orcamento.setDataAtualizacao(new LocalDate());
-        orcamento.setHoraAtualizacao(new LocalTime());
+        carregarOrcamentoUpdate(orcamento);
     }
 
     private void carregarOrcamentoUpdate(Orcamento orcamento) {
-        orcamento.setValorTotal(OrcamentoHelper.getValorTotal(repository.find(orcamento.getId())));
+        Orcamento find = repository.find(orcamento.getId());
+        orcamento.setValorTotalQuadros(new BigDecimal(OrcamentoHelper.getValorTotalSomenteParametros(find)));
+        orcamento.setValorTotalQuadrosExtenso(LabUtil.adicionaParenteses(new CurrencyWriter().writeCapitalize(orcamento
+                .getValorTotalQuadros())));
+
+        orcamento.setValorTotal(OrcamentoHelper.getValorTotal(orcamento));
+        orcamento.setValorTotalExtenso(LabUtil.adicionaParenteses(new CurrencyWriter().writeCapitalize(orcamento
+                .getValorTotal())));
         orcamento.setDataAtualizacao(new LocalDate());
+        orcamento.setDataPorExtenso(DataUtil.getDataPorExtenso(orcamento.getDataAtualizacao()));
         orcamento.setHoraAtualizacao(new LocalTime());
     }
 
@@ -156,6 +171,24 @@ public class OrcamentoController {
         quadroOrcamentoRepository.destroy(quadroOrcamentoRepository.find(quadroOrcamento.getId()));
         result.use(Results.json()).withoutRoot().from(quadroOrcamento).serialize();
     }
-    
+
+    @Get("/orcamentos/reports/{orcamento.id}")
+    public void openReport(Orcamento orcamento) {
+        Orcamento find = repository.find(orcamento.getId());
+        byte[] arquivo = GeradorRelatorioHelper.createPDF(find);
+        response.setContentType("application/pdf");  
+        response.setContentLength(arquivo.length);
+        String nomeArquivo = "Orcamento_" + find.getNumero() + "_" + find.getCliente().getNome() + ".pdf";
+        response.setHeader("Content-Disposition", "filename=\"" + nomeArquivo );
+        ServletOutputStream ouputStream;
+        try {
+            ouputStream = response.getOutputStream();
+            ouputStream.write(arquivo, 0, arquivo.length);  
+            ouputStream.flush();  
+            ouputStream.close();  
+        } catch (IOException e) {
+            e.printStackTrace();
+        }  
+    }
 
 }

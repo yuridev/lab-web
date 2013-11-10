@@ -17,9 +17,10 @@ public class Orcamento extends Entity {
 
     private String numero;
     private BigDecimal valorTotal;
+    private BigDecimal valorTotalQuadros;
     @ManyToOne
     private Cliente cliente;
-
+    
     @OneToMany(mappedBy = "orcamento")
     private List<QuadroOrcamento> quadros;
 
@@ -30,7 +31,9 @@ public class Orcamento extends Entity {
     private BigDecimal valorColeta;
     
     private Integer diasValidade;
-    
+    private String valorTotalExtenso;
+    private String valorTotalQuadrosExtenso;
+    private String dataPorExtenso;
 
     public BigDecimal getValorKM() {
         return valorKM;
@@ -103,5 +106,40 @@ public class Orcamento extends Entity {
     public void setDiasValidade(Integer diasValidade) {
         this.diasValidade = diasValidade;
     }
+
+    public String getValorTotalExtenso() {
+        return valorTotalExtenso;
+    }
+
+    public void setValorTotalExtenso(String valorTotalExtenso) {
+        this.valorTotalExtenso = valorTotalExtenso;
+    }
+    
+    public BigDecimal getValorTotalQuadros() {
+        return valorTotalQuadros;
+    }
+
+    public void setValorTotalQuadros(BigDecimal valorTotalQuadros) {
+        this.valorTotalQuadros = valorTotalQuadros;
+    }
+
+    public String getValorTotalQuadrosExtenso() {
+        return valorTotalQuadrosExtenso;
+    }
+
+    public void setValorTotalQuadrosExtenso(String valorTotalQuadrosExtenso) {
+        this.valorTotalQuadrosExtenso = valorTotalQuadrosExtenso;
+    }
+
+    public String getDataPorExtenso() {
+        return dataPorExtenso;
+    }
+
+    public void setDataPorExtenso(String dataPorExtenso) {
+        this.dataPorExtenso = dataPorExtenso;
+    }
+
+
+
 
 }
