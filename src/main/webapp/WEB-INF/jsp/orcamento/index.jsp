@@ -15,7 +15,7 @@
 
 		<c:forEach items="${orcamentoList}" var="orcamento">
 			<tr>
-				<td><a href="${pageContext.request.contextPath}/orcamentos/${orcamento.id}">${orcamento.numero}</a></td>
+				<td>${orcamento.numero}</td>
 				<td>${orcamento.cliente.nome}</td>
 				<td>${orcamento.valorTotal}</td>
 				<td colspan="2">

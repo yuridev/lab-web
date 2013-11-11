@@ -287,13 +287,13 @@
 
 		<div class="control-group">
 			<div class="controls">
-				<input type="text" name="orcamento.valorColeta" placeholder="Valor da Coleta" value="${orcamento.valorColeta }" class="money1" />
+				<input type="text" name="orcamento.valorColeta" placeholder="Valor da Coleta" value="${orcamento.valorColeta }" class="money1" required="required"/>
 			</div>
 		</div>
 		
 		<div class="control-group">
 			<div class="controls">
-				<input type="text" name="orcamento.valorKM" placeholder="KM rodado (R$) x kilometragem" value="${orcamento.valorKM }" class="money1" />
+				<input type="text" name="orcamento.valorKM" placeholder="KM rodado (R$) x kilometragem" value="${orcamento.valorKM }" class="money1" required="required"/>
 			</div>
 		</div>
 		<div class="control-group">
