@@ -18,6 +18,7 @@
 <link
 	href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css"
 	rel="stylesheet" type="text/css" />
+	
 <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
 
 <script src="${pageContext.request.contextPath}/javascripts/application.js"></script>

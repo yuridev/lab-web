@@ -223,6 +223,7 @@
 											$("#listaParametros").empty();
 											document.getElementById("valorTotal").value = Number(0.0).toFixed(2);
 											document.getElementById("nomeQuadro").value = "";
+											document.getElementById("quantidadeAmostras").value = "";
 											parametrosAux = '';
 											alert("Quadro incluido com sucesso!");
 										});
@@ -253,11 +254,11 @@
 					<table id="table-quadros"
 						class="table table-striped table-bordered table-condensed">
 						<tr>
-							<th>Quadro</th>
-							<th>Par&acirc;metros</th>
-							<th>Valor (R$)</th>
-							<th>Quantidade Amostras</th>
-							<th>A&ccedil;&otilde;es</th>
+							<th width="20%">Quadro</th>
+							<th width="50%">Par&acirc;metros</th>
+							<th width="10%">Valor (R$)</th>
+							<th width="10%">Qtd. Amostras</th>
+							<th width="10%">A&ccedil;&otilde;es</th>
 						</tr>
 						<c:if test="${not empty orcamento.quadros}">
 							<c:forEach items="${orcamento.quadros }" var="quadroFor">
@@ -272,7 +273,7 @@
 										</c:forEach> 
 										</span>
 									</td>
-									<td>${quadroFor.valorTotal }</td>
+									<td><span class="money3">${quadroFor.valorTotal }</span></td>
 									<td>${quadroFor.quantidadeAmostras }</td>
 									<td><a
 										href="#" onclick="deletarQuadro(${quadroFor.id });"><img
