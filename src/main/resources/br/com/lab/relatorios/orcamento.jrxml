@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="orcamento" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4b059994-62a9-44d6-915f-e6cc0d93997d">
 	<property name="ireport.zoom" value="1.4641000000000026"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="542"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -55,14 +55,14 @@
 			<textField>
 				<reportElement uuid="3b193154-8612-4ce5-b2c7-4d13ebc90500" x="333" y="48" width="199" height="20" forecolor="#336531"/>
 				<textElement>
-					<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true"/>
+					<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true" pdfFontName="Century Schoolbook"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement uuid="d9c146d1-95c4-41b7-807a-d759bb50cc50" x="293" y="48" width="37" height="20" forecolor="#336531"/>
 				<textElement textAlignment="Right">
-					<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true"/>
+					<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true" pdfFontName="Century Schoolbook"/>
 				</textElement>
 				<text><![CDATA[Nº]]></text>
 			</staticText>
@@ -73,7 +73,7 @@
 			<staticText>
 				<reportElement uuid="44b14577-f641-42b3-9442-92b9e97cc2ac" x="227" y="28" width="305" height="20" forecolor="#336531"/>
 				<textElement>
-					<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true"/>
+					<font fontName="Century Schoolbook" size="16" isBold="true" isItalic="true" pdfFontName="Century Schoolbook"/>
 				</textElement>
 				<text><![CDATA[PROPOSTA TÉCNICA COMERCIAL]]></text>
 			</staticText>
