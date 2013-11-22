@@ -83,7 +83,13 @@ public class OrcamentoController {
     }
 
     private void carregarOrcamentoUpdate(Orcamento orcamento) {
-        Orcamento find = repository.find(orcamento.getId());
+        Orcamento find;
+        if(orcamento.getId() == null) {
+            find = repository.find(orcamento.getId());
+        } else {
+            find = orcamento;
+        }
+                
         orcamento.setValorTotalQuadros(new BigDecimal(OrcamentoHelper.getValorTotalSomenteParametros(find)));
         orcamento.setValorTotalQuadrosExtenso(LabUtil.adicionaParenteses(new CurrencyWriter().writeCapitalize(orcamento
                 .getValorTotalQuadros())));
