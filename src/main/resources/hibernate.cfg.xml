@@ -4,7 +4,7 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:postgresql://amcf.no-ip.biz:5432/kbf</property>
+		<property name="hibernate.connection.url">jdbc:mysql://192.168.25.200:3306/kbf</property>
 <!-- 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/kbf</property> -->
 		<property name="hibernate.connection.username">root</property>
 		<property name="connection.password"></property>
@@ -17,11 +17,10 @@
 		<mapping class='br.com.lab.models.Orcamento'/>
 		<mapping class='br.com.lab.models.QuadroOrcamento'/>
 		<mapping class='br.com.lab.models.SequenciadorOrcamento'/>
-		<mapping class='br.com.lab.models.Laudo'/>
-		<mapping class='br.com.lab.models.CertificadoEnsaio'/>
-		<mapping class='br.com.lab.models.ParametroAnalisado'/>
-		<mapping class='br.com.lab.models.Amostra'/>
-		<mapping class='br.com.lab.models.Coleta'/>
-		<mapping class='br.com.lab.models.Coleta'/>
+<!-- 		<mapping class='br.com.lab.models.Laudo'/> -->
+<!-- 		<mapping class='br.com.lab.models.CertificadoEnsaio'/> -->
+<!-- 		<mapping class='br.com.lab.models.ParametroAnalisado'/> -->
+<!-- 		<mapping class='br.com.lab.models.Amostra'/> -->
+<!-- 		<mapping class='br.com.lab.models.Coleta'/> -->
 	</session-factory>
 </hibernate-configuration>
