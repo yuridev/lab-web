@@ -84,7 +84,7 @@ public class OrcamentoController {
 
     private void carregarOrcamentoUpdate(Orcamento orcamento) {
         Orcamento find;
-        if(orcamento.getId() == null) {
+        if(orcamento.getId() != null) {
             find = repository.find(orcamento.getId());
         } else {
             find = orcamento;
