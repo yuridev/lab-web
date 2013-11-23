@@ -163,10 +163,10 @@
 								
 								
 								function removerParametro(item, idParametro) {
-									var campoValorAtual = $("input=[id=valorTotal]");
+									var campoValorAtual = $("input[id=valorTotal]");
 									var valorFinal = 0.0;
-									valorFinal = parseFloat(campoValorAtual.value.replace(",", ".")) - precos[idParametro];
-									campoValorAtual.value = Number(valorFinal).toFixed(2);
+									valorFinal = parseFloat(campoValorAtual.val().replace(",", ".")) - precos[idParametro];
+									campoValorAtual.val(Number(valorFinal).toFixed(2));
 									$('.money2').mask("#.##0,00", {
 										reverse : true,
 										maxlength : false
@@ -294,12 +294,14 @@
 		
 		<div class="control-group">
 			<div class="controls">
-				<input type="text" name="orcamento.valorKM" placeholder="KM rodado (R$) x kilometragem" value="${orcamento.valorKM }" class="money1" required="required"/>
+				<input type="text" placeholder="Quant. Km" onkeyup="calcularValorKmRodado();" id="qtdKm" class="integer input-small"/> x 
+				<input type="text" placeholder="R$/Km rodado" onkeyup="calcularValorKmRodado();" id="vlrKm" class="money1 input-small"/> = 
+				<input type="text" name="orcamento.valorKM" id="valorTotalKm" placeholder="Quant. Km x R$/Km rodado" value="${orcamento.valorKM }" class="money1" required="required" onkeypress="setarValorManual();" />
 			</div>
 		</div>
 		<div class="control-group">
 			<div class="controls">
-				<input type="text" name="orcamento.diasValidade" placeholder="Dias de validade" value="${orcamento.diasValidade == 0 ? "" : orcamento.diasValidade}" class="integer" required="required"/>
+				<input type="text" name="orcamento.diasValidade" placeholder="Dias de validade" value="${orcamento.diasValidade == 0 ? "" : orcamento.diasValidade}" class="input-medium integer" required="required"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -349,5 +351,17 @@
 		$.getJSON("/orcamentos/deletarQuadro/" + id, function(json) {
 			$('#tr-quadro-'+json.id).remove();
 		});
+	}
+	
+	function calcularValorKmRodado(){
+		var qtdKm = Number($("#qtdKm").val()).toFixed(2);
+		var vlrKm = Number($("#vlrKm").val()).toFixed(2);
+		var valorTotalKm = Number(qtdKm * vlrKm).toFixed(2);
+		$("#valorTotalKm").val(valorTotalKm);
+	}
+	
+	function setarValorManual() {
+		$("#qtdKm").val("");
+		$("#vlrKm").val("");
 	}
 </script>

@@ -5,7 +5,9 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +41,12 @@ import br.com.lab.util.LabUtil;
 @Resource
 public class OrcamentoController {
 
+    private static final String IMAGEM_CABECALHO = "C:\\Users\\Administrador\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\logokbf.jpg";
+    private static final String IMAGEM_RODAPE = "C:\\Users\\Administrador\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\rodape.png";
+    
+//    private static final String IMAGEM_CABECALHO = "C:\\Users\\Yuri\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\logokbf.jpg";
+//    private static final String IMAGEM_RODAPE = "C:\\Users\\Yuri\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\rodape.png";
+    
     private final Result result;
     private final OrcamentoRepository repository;
 
@@ -181,7 +189,7 @@ public class OrcamentoController {
     @Get("/orcamentos/reports/{orcamento.id}")
     public void openReport(Orcamento orcamento) {
         Orcamento find = repository.find(orcamento.getId());
-        byte[] arquivo = GeradorRelatorioHelper.createPDF(find);
+        byte[] arquivo = GeradorRelatorioHelper.createPDF(find, getParametrosRelatorio());
         response.setContentType("application/pdf");  
         response.setContentLength(arquivo.length);
         String nomeArquivo = "Orcamento_" + find.getNumero() + "_" + find.getCliente().getNome() + ".pdf";
@@ -195,6 +203,13 @@ public class OrcamentoController {
         } catch (IOException e) {
             e.printStackTrace();
         }  
+    }
+
+    private Map<String, Object> getParametrosRelatorio() {
+        Map<String, Object> parametros = new HashMap<String, Object>();
+        parametros.put("IMAGEM_CABECALHO", IMAGEM_CABECALHO);
+        parametros.put("IMAGEM_RODAPE", IMAGEM_RODAPE);
+        return parametros;
     }
 
 }
