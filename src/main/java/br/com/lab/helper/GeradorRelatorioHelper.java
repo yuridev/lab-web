@@ -23,6 +23,7 @@ public class GeradorRelatorioHelper {
         byte[] retorno = null;
         List<Orcamento> orcamentos = new ArrayList<Orcamento>();
         orcamentos.add(orcamento);
+        parametros.put("SUBREPORT_DIR", PATH_RELATORIO);
         try {
             JRDataSource dataSource = new JRBeanCollectionDataSource(orcamentos);
             JasperPrint print = JasperFillManager.fillReport(PATH_RELATORIO + "orcamento.jasper", parametros , dataSource);
