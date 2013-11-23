@@ -261,6 +261,9 @@
 		<band height="43">
 			<subreport>
 				<reportElement uuid="a083fc75-f079-4edf-ab37-153fcd87b705" x="60" y="0" width="453" height="43"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="quadros">
 					<subreportParameterExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{quadros})]]></subreportParameterExpression>
 				</subreportParameter>
