@@ -25,22 +25,14 @@ public class GeradorRelatorioHelper {
     private static final String OUTPUT_FOLDER = "C:\\Users\\Yuri\\Documents\\";
     private static final String PATH_RELATORIO = "C:\\Users\\Yuri\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\";
 
-    public static byte[] createPDF(Orcamento orcamento) {
+    public static byte[] createPDF(Orcamento orcamento, Map<String, Object> parametros) {
         byte[] retorno = null;
         List<Orcamento> orcamentos = new ArrayList<Orcamento>();
         orcamentos.add(orcamento);
         try {
             JRDataSource dataSource = new JRBeanCollectionDataSource(orcamentos);
-            Map<String, Object> parametros = new HashMap<String, Object>();
             JasperPrint print = JasperFillManager.fillReport(PATH_RELATORIO + "orcamento.jasper", parametros , dataSource);
-            
             retorno = JasperExportManager.exportReportToPdf(print);
-            
-            JRExporter exporter = new JRPdfExporter();
-            String nomeRelatorio = "relatorio";
-            exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
-            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(OUTPUT_FOLDER + nomeRelatorio + ".pdf"));
-            exporter.exportReport();
             System.out.println("RELATORIO GERADO COM SUCESSO!!!!!!");
         } catch (Exception e) {
             e.printStackTrace();
