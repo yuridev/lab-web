@@ -1,29 +1,23 @@
 package br.com.lab.helper;
 
-import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import br.com.lab.models.Cliente;
 import br.com.lab.models.Orcamento;
-import br.com.lab.models.Parametro;
-import br.com.lab.models.QuadroOrcamento;
 
 public class GeradorRelatorioHelper {
     
     
-    private static final String OUTPUT_FOLDER = "C:\\Users\\Yuri\\Documents\\";
-    private static final String PATH_RELATORIO = "C:\\Users\\Yuri\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\";
+//    private static final String PATH_RELATORIO = "C:\\Users\\Yuri\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\";
+    
+    private static final String PATH_RELATORIO = "C:\\Users\\Administrador\\Documents\\GitHub\\lab-web\\src\\main\\resources\\br\\com\\lab\\relatorios\\";
+    
 
     public static byte[] createPDF(Orcamento orcamento, Map<String, Object> parametros) {
         byte[] retorno = null;
